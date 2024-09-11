@@ -1,0 +1,27 @@
+Last login: Mon Sep  9 11:32:33 on ttys000
+1030555@1030555-student-FVFMR4CP1WFV ~ % ls
+Desktop		Library		Pictures	macbook
+Documents	Movies		Public		stuff
+Downloads	Music		and
+1030555@1030555-student-FVFMR4CP1WFV ~ % cd desktop
+1030555@1030555-student-FVFMR4CP1WFV desktop % echo > quiz.txt
+1030555@1030555-student-FVFMR4CP1WFV desktop % less > quiz.txt
+1030555@1030555-student-FVFMR4CP1WFV desktop % less quiz.txt
+1030555@1030555-student-FVFMR4CP1WFV desktop % echo > move_me.txt
+1030555@1030555-student-FVFMR4CP1WFV desktop % echo > copy_me.txt
+1030555@1030555-student-FVFMR4CP1WFV desktop % cat quiz.txt
+Missing filename ("less --help" for help)
+1030555@1030555-student-FVFMR4CP1WFV desktop % mv move_me.txt > quiz.txt
+usage: mv [-f | -i | -n] [-hv] source target
+       mv [-f | -i | -n] [-v] source ... directory
+1030555@1030555-student-FVFMR4CP1WFV desktop % echo > destination.txt
+1030555@1030555-student-FVFMR4CP1WFV desktop % mv move_me.txt > destination.txt
+usage: mv [-f | -i | -n] [-hv] source target
+       mv [-f | -i | -n] [-v] source ... directory
+1030555@1030555-student-FVFMR4CP1WFV desktop % mv move_me.txt > stuff
+usage: mv [-f | -i | -n] [-hv] source target
+       mv [-f | -i | -n] [-v] source ... directory
+1030555@1030555-student-FVFMR4CP1WFV desktop % rm copy_me.txt
+1030555@1030555-student-FVFMR4CP1WFV desktop % UseShell ->
+zsh: parse error near `\n'
+1030555@1030555-student-FVFMR4CP1WFV desktop % 
