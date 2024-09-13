@@ -1,4 +1,4 @@
-* hello this is my journal
+##  hello this is my journal
 
 in my journal I will write about.
 - my coding journey
