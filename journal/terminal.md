@@ -4,5 +4,5 @@ I dont have  a journey
 im  alone
 
 # heres my journal entry
-- [my journey learning the terminal](terminal.md)
+- [my journey learning the terminal](index.md)
 
