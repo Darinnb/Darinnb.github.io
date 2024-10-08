@@ -5,6 +5,5 @@ in my journal I will write about.
 - my intrest
 - anything my teacher tells me to write
 
-- [my journey learning the terminal](terminal.md)
 - [My first journal entry](entries/terminal.md)
 
