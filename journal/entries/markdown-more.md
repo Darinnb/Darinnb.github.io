@@ -19,7 +19,7 @@ blah blah blah
 # heres a link
 
 [this is the text that is displayed](www.example.com)
-![this is the text](../../entries/markdown-more.jpg)
+![this is the text]( https://octopus.org.nz/sites/default/files/users/user18/Blobfish.jpg)
 
 
 
