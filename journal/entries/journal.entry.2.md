@@ -12,5 +12,6 @@ on oct 7, 2024 I was in English class. In english class we transaltes the openin
 
 hope fully the table gave you a little bit of understanding of some characters
 
-## picture of Romeo and Juliet 
-![painting of romeo and juliet](https://www.magicmurals.com/media/amasty/webp/catalog/product/cache/155d73b570b90ded8a140526fcb8f2da/J/L/JLM-0000000016_1_jpg.webp)  
+## picture of Romeo and Juliet
+![painting of romeo and juliet](https://www.magicmurals.com/media/amasty/webp/catalog/product/cache/155d73b570b90ded8a140526fcb8f2da/J/L/JLM-0000000016_1_jpg.webp)
+
