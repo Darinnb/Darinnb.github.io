@@ -16,6 +16,15 @@ blah blah blah
 2. list item 2
 3. list item 3
 
+## not cartoon cats I promise
+|name | Facts |
+|---- | ------ |
+|garfeild | Likes lasangna |
+|tom | Chases Jerry |
+|meowth | Thats right! |
+
+
+
 # heres a link
 
 [this is the text that is displayed](www.example.com)
