@@ -6,4 +6,5 @@ in my journal I will write about.
 - anything my teacher tells me to write
 
 - [My first journal entry](entries/terminal.md)
+- [my second journal entry](journal/journal.entry.2.md)
 
