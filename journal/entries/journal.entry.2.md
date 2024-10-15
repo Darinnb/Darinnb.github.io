@@ -3,6 +3,7 @@
 on oct 7, 2024 I was in English class. In english class we transaltes the opening sonnet of Romeo and Juliet into simpler terms. We also wrote 3 lines of iambic penameter. It was very intresting and I really like that class because im always entertained.
 
 ## this is a table of Romeo +/and Juliet characters
+
 | Name | Role |
 | ------- | ------ |
 | Romeo | Male lead role, Juliets lover |
