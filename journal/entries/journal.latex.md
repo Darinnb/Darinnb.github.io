@@ -4,8 +4,7 @@
 
 ## Here is a picture of the LaTeX logo
 
-![Picture of LaTeX logo](https://logowik.com/content/uploads/images/latex6119.logowik.com.webp## These are LaTeX equations)
-
+![Picture of LaTeX logo](https://logowik.com/content/uploads/images/latex6119.logowik.com.webp)
 $$
 
 ### this is another one
