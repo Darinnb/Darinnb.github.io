@@ -4,7 +4,7 @@
 
 ## Here is a picture of the LaTeX logo
 
-![Picture of LaTeX logo](https://logowik.com/content/uploads/images/latex6119.logowik.com.webp)
+![Picture of LaTeX logo](https://images.dwncdn.net/images/t_app-cover-s,f_auto/p/9f17e917-7f29-4d22-a7fc-b2816cddddec/1808186295/2121_4-77576175-imgingest-3432842257878972364.png)
 $$
 
 ### this is another one
