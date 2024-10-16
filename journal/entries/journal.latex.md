@@ -22,7 +22,7 @@ $$\tfrac{3}{5} + \frac{2}{4} + \frac{7+\frac{2}{4}}{9} + \frac{2+\dfrac{1}{1}}{7
 
 ## Here is a table
 
-this table rates the different snack food i ate while trying to figure out how LaTeX works. :)
+this table that rates the different snack food i ate while trying to figure out how LaTeX works. :)
 
 | Food | Rating |
 | ---- | ----- |
