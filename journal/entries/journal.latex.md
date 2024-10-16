@@ -9,6 +9,7 @@
 ## Here are 2 LaTex equations 
 
 ### this is one
+$$ \sqrt{x-3} +3 \lt 8
 
 ### this is the second
 
