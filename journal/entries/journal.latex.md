@@ -12,11 +12,11 @@
 
 $$\underbrace{
 \overbrace{a+b}^2 \cdot \overbrace{c+d}^3
-}_\ = 6$
+}_\ = 6$$
 
 ### this is the second
 
-$$\tfrac{3}{5} + \frac{2}{4} + \frac{7+\frac{2}{4}}{9} + \frac{2+\dfrac{1}{1}}{7}$
+$$\tfrac{3}{5} + \frac{2}{4} + \frac{7+\frac{2}{4}}{9} + \frac{2+\dfrac{1}{1}}{7}$$
 
 ## Here is a table
 
