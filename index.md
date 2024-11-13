@@ -1,1 +1,0 @@
-- [My first journal entry](entries/01_Intro.md)
