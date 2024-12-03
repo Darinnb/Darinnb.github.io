@@ -1,0 +1,14 @@
+
+        body {
+background-color:rgba(i42, 195, 255,.4);
+}
+        header {
+background-color:blue;
+}
+        th,td,table {
+border: 1px solid;
+border-collapse: collapse;
+
+}
+                              
+
