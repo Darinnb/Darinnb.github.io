@@ -1,35 +1,81 @@
 
 <!DOCTYPE html>
 <html lang="en">
-		<head>
-			<title>Darin Website</title>
-			<script src="js/init.js"></script>
-			<link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />			
+<head>
+	<title>Darin Website</title>
+	<script src="js/init.js"></script>
+	<link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />			
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
 
-		</head>
-		<body style="background-color: pink">
-			<h1 style="background-color: lavender" >I'm Darin and this is my website</h1>
-			<h2>Welcome :)</h2>
-			<h3>A picture of a blobfish</h3>
-				<img src="image/blobfish_small.png"
-				alt="A picture of my spirit animal;blobfish"
+<style>
+.grid{
+ display:grid;
+        grid-template-rows: repeat(8, 1fr);
+        grid-template-columns: repeat(8, 1fr);
+        height:100vh;
+        text-align:center;
+        font-size:2em;
+        gap:10px;
+}
+.head{
+	grid-column-start:1;
+	grid-column-end:9;
+	grid-row-start:1;
+	background-color:#7daf9c;
+}
+.nunito {
+  font-family: "Nunito", serif;
+  font-weight: <weight>;
+  font-style: normal;
+}
+.side{
+	grid-column-start:1;
+	grid-column-end:3;
+	grid-row-start:2;
+	grid-row-end:6;
+	font-size:15px;
+	background-color:#23967f;
+}
+.pic{
+	grid-row:9;
+	grid-column:4;
+}
+.project{
+	grid-column-start:7;
+	grid-column-end:9;
+	grid-row-start:2;
+	grid-row-end:6;
+	background-color:#23967f;
+	font-size:15px;
+}
+</style>
+</head>
+<body>
+<div class="grid">
+<div class="pic"><img src="image/blobfish_small.png"
+                                alt="A picture of my spirit animal;blobfish"
 
-				srcset="image/blobfish_small.png 480w,
-   					image/blobfish_medium.png 800w,
- 					image/blobfish_large.png 1200w"
-				sizes="(max-width: 480px) 95vw,
-  				       (max-width: 800px) 45vw,
-   					 30vw">			
-	<p>I used to be obsessed with Anne With an E so this is one of my favorite quotes from the show<p>
-		<blockquote>
-				<p>The best part of knowing the rules is finding acceptable ways of breaking them.</p>
-		<footer>- Winifred Rose</footer>
-		</blockquote>
-			<a style="background-color:LightPink; color:grey" href="journal/">Click here to read my journal</a>
-			<br>
-			<a href="recipe/recipe.html">recipes</a>
-	
-
-
+                                srcset="image/blobfish_small.png 480w,
+                                        image/blobfish_medium.png 800w,
+                                        image/blobfish_large.png 1200w"
+                                sizes="(max-width: 480px) 95vw,
+                                       (max-width: 800px) 45vw,
+                                         30vw"></div>
+<div class="head nunito"><h1>Darin Portfolio</h1></div>
+<div class="side nunito" ><p>I used to be obsessed with Anne With an E so this is one of my favorite quotes from the show<p>
+<blockquote>
+<p>The best part of knowing the rules is finding acceptable ways of breaking them.</p>
+                <cite>- Winifred Rose</cite>
+</blockquote></div>
+<div class="project nunito"><h2>Projects</h2>
+		<p>Here are some of my past projects that Iv'e completed in Web Design.</p> 
+<ul>
+<li>
+<p>Two different <a href="recipe/recipe.html">recipes</a> made during thanksgiving!</p>
+</li></div>
+</div>
+                        
 		</body>
 </html> 
