@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
 
 <style>
-.grid{
+#grid{
  display:grid;
         grid-template-rows: repeat(8, 1fr);
         grid-template-columns: repeat(8, 1fr);
@@ -24,57 +24,88 @@
 	grid-column-end:9;
 	grid-row-start:1;
 	background-color:#7daf9c;
+	padding-top: 10px;
+	padding-bottom: 15px;
 }
 .nunito {
   font-family: "Nunito", serif;
-  font-weight: <weight>;
+  font-weight:5;
   font-style: normal;
 }
 .side{
 	grid-column-start:1;
 	grid-column-end:3;
 	grid-row-start:2;
-	grid-row-end:6;
+	grid-row-end:10;
 	font-size:15px;
 	background-color:#23967f;
-}
-.pic{
-	grid-row:9;
-	grid-column:4;
 }
 .project{
 	grid-column-start:7;
 	grid-column-end:9;
 	grid-row-start:2;
-	grid-row-end:6;
+	grid-row-end:10;
 	background-color:#23967f;
 	font-size:15px;
+}
+.middle{
+	grid-column-start:3;
+	grid-column-end:7;
+	grid-row-start:2;
+	grid-row-end:10;
+	background-color:#db93b0;
 }
 </style>
 </head>
 <body>
-<div class="grid">
-<div class="pic"><img src="image/blobfish_small.png"
-                                alt="A picture of my spirit animal;blobfish"
-
-                                srcset="image/blobfish_small.png 480w,
-                                        image/blobfish_medium.png 800w,
-                                        image/blobfish_large.png 1200w"
-                                sizes="(max-width: 480px) 95vw,
-                                       (max-width: 800px) 45vw,
-                                         30vw"></div>
+<div id="grid">
 <div class="head nunito"><h1>Darin Portfolio</h1></div>
-<div class="side nunito" ><p>I used to be obsessed with Anne With an E so this is one of my favorite quotes from the show<p>
+<div class="side nunito" ><p>I used to be obsessed with Anne With an E so this is one of my favorite quotes from the show.<p>
 <blockquote>
 <p>The best part of knowing the rules is finding acceptable ways of breaking them.</p>
                 <cite>- Winifred Rose</cite>
-</blockquote></div>
+</blockquote>
+<br>
+<table>
+<thead>
+<tr>
+<th style="border:1px">Personal Website Project</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<p>The recipe page is the second page in my personal website project Mr.Jones :)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 <div class="project nunito"><h2>Projects</h2>
 		<p>Here are some of my past projects that Iv'e completed in Web Design.</p> 
 <ul>
 <li>
 <p>Two different <a href="recipe/recipe.html">recipes</a> made during thanksgiving!</p>
-</li></div>
+</li>
+<li>
+<p>Wordpress company website on sending people to <a href="https://metomars1.wordpress.com/">Mars.</a>
+</li>
+</ul>
+</div>
+<div class="middle nunito"><h2>Overview</h2>
+<p>this homepage will display information about myself and what I'm working on. This blobfish is my spirit animal by the way. :)</p>
+<img src="image/blobfish_small.png"
+                                alt="A picture of my spirit animal;blobfish"
+
+                                srcset="image/blobfish_small.png 530w,
+                                        image/blobfish_medium.png 850w,
+                                        image/blobfish_large.png 1250w"
+                                sizes="(max-width: 480px) 95vw,
+                                       (max-width: 800px) 45vw,
+                                         30vw"></div>
+
+
+
 </div>
                         
 		</body>
