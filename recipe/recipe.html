@@ -3,27 +3,69 @@
 	<head>
 		<script src="../js/init.js"></script>
 		<title>Darin's Recipes</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+<style>
+#grid{
+ display:grid;
+        grid-template-rows: repeat(8, 1fr);
+        grid-template-columns: repeat(8, 1fr);
+        height:100vh;
+        text-align:center;
+        font-size:2em;
+}
+.head{
+	grid-column-start:1;
+	grid-column-end:9;
+	grid-row-start:1;
+	padding-top: 10px;
+	padding-bottom: 15px;
+	background-color:#f7bfb4;
+	margin-bottom:10px;
+}
+.side1{
+	grid-column-start:1;
+	grid-column-end:4;
+	grid-row-start:2;
+	grid-row-end:7;
+	background-color:#5b4b49;
+}
+.side2{
+	grid-column-start:6;
+	grid-column-end:9;
+	grid-row-start:2;
+	grid-row-end:7;
+	background-color:#5b4b49;
+}
+.footer{
+	grid-column-start:1;
+	grid-column-end:9;
+	grid-row-start:7;
+	grid-row-end:9;
+	background-color:#db93b0;
+	font-size:10px;
+}
+.space{
+	grid-column-start:4;
+	grid-column-end:6;
+	grid-row-start:2;
+	grid-row-end:7;
+	background-color:#db93b0;
+}
+</style>
 	</head>
 
        	<body>
-	<!-- Links to recipes -->
-		<h1> These are some recipes! </h1>
-		<ul>
-			<li>
-				<a href="recipe1.html">Mashed Potatoes</a>
-This recipe is very important to me becuase I eat mashed potatoes every ThanksGiving!
-			</li>
-			<li>
-				<a href="recipe2.html">Second Recipe</a>
-This is a choclate chip cookie recipe that I made from using my own mind and compiling like 10 different recipes. So I hope it works.
-
-			</li>
-		</ul>
-
-
-
-
-
-
+<div id="grid">
+<div class="head nunito"><h1>Recipe Project</h1></div>
+<div class="side1 nunito"><a href="recipe1.html">Mashed Potatoes</a><p>This recipe is very important to me becuase I eat mashed potatoes every ThanksGiving!
+</p></div>
+<div class="side2 nunito"><a href="recipe2.html">chocolate chip cookies</a><p>This is a choclate chip cookie recipe that I made from using my own mind and compiling like 10 different recipes. So I hope it works.
+</p></div>
+<div class="footer">
+</div>
+<div class="space"></div>
+</div>
 	</body>
 	</html>
