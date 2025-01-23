@@ -1,3 +1,0 @@
-# Pixel Art
-
-This-[link](pixel_art.html)brings you to my Pixel Art that I tried to do. I copied the starter code and deleted, edited and played around with it. I stil don't fully understand how the whole pixel art creation process works. Even so, just by playing with the code page I was still able to figure out some specific intresting things about different ways to set of divs. I think I became much more confident with RGB  codes becuase ussualy when I use RGB codes I only got them from color palletes. This time I actually thought about how to create the colors on my own. I knew I wanted to make pinkish colrs so, when I finally saved my work and opened it up on the browser I was so happy to see colors that IIIIIII created!!
