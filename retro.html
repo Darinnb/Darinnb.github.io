@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Darin Website</title>
+	<script src="js/init.js"></script>
+	<link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />		
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jersey+10&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jersey+10&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<style>
+#grid{
+ display:grid;
+        grid-template-rows: repeat(8, 1fr);
+        grid-template-columns: repeat(8, 1fr);
+        height:100vh;
+        text-align:center;
+        font-size:2em;
+        gap:10px;
+}
+.food {
+  font-family: "Roboto Condensed", serif;
+  font-weight:900;
+  font-style: normal;
+}
+
+.jersey{
+  font-family: "Jersey 10", serif;
+  font-weight: 900;
+  font-style: normal;
+font-size:2.1em;
+}
+.head{
+	grid-column-start:1;
+	grid-column-end:9;
+	grid-row-start:1;
+	background-color:#f2b5d4;
+	padding-top: 10px;
+	padding-bottom: 15px;
+}
+.menu{
+	grid-column-start:1;
+	grid-column-end:5;
+	grid-row-start:2;
+	grid-row-end:10;
+	font-size:1em;
+	background-color:#7bdff2;
+}
+.project{
+	grid-column-start:7;
+	grid-column-end:9;
+	grid-row-start:2;
+	grid-row-end:10;
+	background-color:#23967f;
+	font-size:15px;
+}
+.middle{
+	grid-column-start:5;
+	grid-column-end:9;
+	grid-row-start:2;
+	grid-row-end:10;
+	background-color:#b2f7ef;
+}
+</style>
+</head>
+<body>
+<div id="grid">
+<div class="head jersey"><p>8 Bit Diner</p></div>
+<div class="menu food"><h1>Entree</h1><ul><li>Burger</li><li>Hotdogs</li><li>Waffle and Chicken Tenders</li><li>pancakes</li><li>scrambled eggs</li></ul>
+</div>
+<div class="middle food"><h1>Drinks and Desserts</h1><ul><li>Vanilla Milkshake</li><li>Strawberry Milkshake</li><li>Chocolate Pancakes</li><li>Root Beer Float</li></ul>
+</div>
+</div>
+
+
+</div>
+</body>
+</html>	
