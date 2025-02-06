@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>An HTML Form</title>
+<script src="../js/init.js"></script>
+	<link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />			
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap">
+<style>
+#grid{
+ display:grid;
+        grid-template-rows: repeat(20, 1fr);
+        grid-template-columns: repeat(20, 1fr);
+        height:100vh;
+        text-align:center;
+        font-size:2em;
+        gap:10px;
+</style>
+</head>
+
+<body>
+<div id="grid">
+
+</div>
+<h1>You're Invited To an Ice Cream Party!</h1>
+        <form action="https://httpbin.org/post" method="post">
+                        <label for="email">What is  you email adress?</label>
+                <input type="email" id="email" name="email" placeholder="Your answer" required>
+                
+<br>
+<br>
+
+<label for="text">What is your phone number?</label>
+<input type="text" id="text" name="phone" placeholder="Your answer" required>
+
+<br>
+<br>
+
+<label for="text">How many people will you bring to the party?</label>
+<input type="text" id="people" name="people" placeholder="Your answer" required>
+
+<br>
+<br>
+
+<p>What is your favorite flavor of ice cream?</p>
+<input type="radio" id="vanilla" name="flavor">
+<label for="radio">Vanilla</label>
+<br>
+<input type="radio" id="Chocolate chip" name="flavor">
+<label for="radio">Chocolate chip</label>
+<br>
+<input type="radio" id="Straw" name="flavor">
+<label for="radio">Strawberry</label>
+<br>
+<input type="radio" id="other" name="flavor"> 
+<label for="radio">Other</label>
+
+<br>
+<br>
+
+<p>Which topping do you like?</p>
+<input type="checkbox" id="sprinkles" name="top">
+<label for="checkbox">Sprinkles</label>
+<br>
+<input type="checkbox" id="Magic shell" name="top">
+<label for="checkbox">Magic shell</label>
+<br>
+<input type="checkbox" id="Chocolate" name="top">
+<label for="checkbox">Chocolate chips</label>
+<br>
+<input type="checkbox" id="Gummy bears" name="top">
+<label for="checkbox">Gummy bears</label>
+<br>
+<input type="checkbox" id="other" name="top>
+       
+
+ </form>
+</body>
+</html>
+
