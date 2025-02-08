@@ -2,27 +2,11 @@
 <html lang="en">
 <head>
 <title>An HTML Form</title>
-<script src="../js/init.js"></script>
+<script src="../../js/init.js"></script>
 	<link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />			
 	<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap">
-<style>
-#grid{
- display:grid;
-        grid-template-rows: repeat(20, 1fr);
-        grid-template-columns: repeat(20, 1fr);
-        height:100vh;
-        text-align:center;
-        font-size:2em;
-        gap:10px;
-</style>
 </head>
-
 <body>
-<div id="grid">
-
-</div>
 <h1>You're Invited To an Ice Cream Party!</h1>
         <form action="https://httpbin.org/post" method="post">
                         <label for="email">What is  you email adress?</label>
@@ -47,7 +31,7 @@
 <input type="radio" id="vanilla" name="flavor">
 <label for="radio">Vanilla</label>
 <br>
-<input type="radio" id="Chocolate chip" name="flavor">
+<input type="radio" id="Choco" name="flavor" >
 <label for="radio">Chocolate chip</label>
 <br>
 <input type="radio" id="Straw" name="flavor">
@@ -63,18 +47,41 @@
 <input type="checkbox" id="sprinkles" name="top">
 <label for="checkbox">Sprinkles</label>
 <br>
-<input type="checkbox" id="Magic shell" name="top">
+<input type="checkbox" id="Magic" name="top">
 <label for="checkbox">Magic shell</label>
 <br>
 <input type="checkbox" id="Chocolate" name="top">
 <label for="checkbox">Chocolate chips</label>
 <br>
-<input type="checkbox" id="Gummy bears" name="top">
+<input type="checkbox" id="Gummy" name="top">
 <label for="checkbox">Gummy bears</label>
 <br>
-<input type="checkbox" id="other" name="top>
+<input type="checkbox" id="another" name="top">
+<label for="checkbox">Other</label>
        
+<br>
+<br>
 
+<label for="watch">What kind of entertainment should we have at the party?</label>
+<br>
+<br>
+<select id="watch" name="watch">
+  <option value="balloon">balloon Animals</option>
+  <option value="bounce">Bounce House</option>
+  <option value="clown">Clown</option>
+  <option value="cornhole">Cornhole</option>
+  <option value="dj">DJ</option>
+  <option value="face">Face Painting</option>
+  <option value="magician">Magician</option>
+</select>
+<br>
+<br>
+
+<label for="text">Do you have any other suggestions or comments?</label>
+<input type="text" id="end" name="final" placeholder="Your answer" >
+<br><br><br><br><br>
+
+<input type="submit" name="submit_this_form_now">
  </form>
 </body>
 </html>
