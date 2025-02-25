@@ -1,0 +1,40 @@
+/* Global styles */
+
+
+.img1 {
+
+	width: 2m;
+	height: 30%;
+	max-width:200px;
+	min-height: 700px;
+	max-height: 900px;
+	min-width:10px;
+}
+
+.img2 {
+
+	align: top;
+	object-fit:fill;
+	object-position: bottom left;
+	border: 5px;
+	border-radius: 3px 20px 40px 10px;
+}
+
+.img3 {
+	
+	box-shadow: 100px 5px rgba(155,0,50,.3);
+	opacity:100%;
+}
+
+.img4 {
+	filter: brightness(1.3);
+	z-index:2;
+}
+
+.img5 {
+	position: relative;
+
+	z-index:1;
+}
+	
+ 
