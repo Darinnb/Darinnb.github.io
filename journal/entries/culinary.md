@@ -4,7 +4,8 @@ I worked on -[this](https://penrosian.github.io/culinary-website/) website. We w
 
 
 ## Picture of my 2 pages
-![first page](../../image/about.png)
+![first page](../../image/about.png) 
 ![second page](../../image/feed.png)
 
 The form that I wrote questioned the user on their experience with Off The Pike. It uses a lot of different form types including radio buttons and text boxes. The method type is POST and I used like 7 different input types in my form.
+
