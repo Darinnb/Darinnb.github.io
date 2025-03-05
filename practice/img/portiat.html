@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Self Portrait</title>
+    <script src="../../js/init.js"></script>
+    <style>
+        canvas{
+            display:block;
+            border:1px solid;
+            margin:auto;
+            margin-top:50px
+        }
+    </style>
+</head>
+<body>
+<canvas id="myCanvas" width="400" height="400"></canvas>
+ <script>
+    const canvas = document.getElementById("myCanvas");
+    const ctx = canvas.getContext("2d");
+ 
+//canvas
+ctx.fillStyle = 'white';
+    ctx.fillRect(0,0,400,400);
+
+//mouth
+ ctx.fillStyle = "red";
+    ctx.fillRect(175,375,100,10);
+//left eye
+ ctx.strokeStyle = "black";
+ ctx.fillStyle = "lightgreen";   
+ ctx.lineWidth=10;
+    ctx.beginPath();
+    ctx.arc(175,100,25,0,Math.PI);
+    ctx.stroke();
+    ctx.fill();
+//righteye
+ctx.strokeStyle = "black";
+ ctx.fillStyle = "lightgreen";   
+ ctx.lineWidth=10;
+    ctx.beginPath();
+    ctx.arc(275,100,25,0,2*Math.PI);
+    ctx.stroke();
+    ctx.fill();
+</script>
+</body>
+</html>
