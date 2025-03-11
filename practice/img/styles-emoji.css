@@ -1,0 +1,82 @@
+body{
+    background-color: #FDE74C;
+}
+
+/* Build the emoji face with gradients and shadow */
+.emoji{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    width: 300px;
+    background-image: radial-gradient(
+        #feca3e 58%,
+        #ff8000 80%
+    );
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 60px 5px 70px rgba(230,0,30,90.25);
+}
+
+
+/* INSERT YOUR KEYFRAME RULES HERE */
+
+/* INSERT YOUR .face CLASS HERE WITH ANIMATION RULES */
+
+
+.eyes {
+    display: flex;
+}
+
+.eye {
+    border: solid #663d0f;
+    border-width: 0 16px 16px 0;
+    position: absolute;
+    padding: 10px;
+}
+
+.left {
+    transform: rotate(180deg);
+    top: 90px;
+    left: 50%;
+}
+
+.right {
+    transform: rotate(180deg);
+    top: 90px;
+    right: 50%;
+}
+
+.mouth{
+    height: 70px;
+    width: 30px;
+    background-color: #663d0f;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    bottom: 25px;
+    overflow: hidden;
+    border-radius: 20px 5px 180px 180px
+}
+
+.teeth{
+    height: 10px;
+    width: 27px;
+    background-color: #e9fbfa;
+    position: absolute;
+    border-radius: 5px 5px 80px 80px;
+}
+
+.tongue{
+    height: 18px;
+    width: 20px;
+    position: absolute;
+    background-color: red;
+    border-radius: 50%;
+    transform: translate(50%);
+   top: 57px;
+}
