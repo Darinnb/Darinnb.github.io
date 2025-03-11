@@ -54,6 +54,16 @@
 	grid-row-end:10;
 	background-color:#db93b0;
 }
+
+.rotate-icon {
+    display: inline-block;
+    transition: transform 0.3s ease-in-out; /* Smooth transition for the transform property */
+}
+
+.rotate-icon:hover {
+    transform: rotate(360deg); /* Icon rotates 180 degrees on hover */
+}
+
 </style>
 </head>
 <body>
@@ -102,7 +112,7 @@
 		<area target="_blank" alt="larva" title="under-lip" href="https://www.youtube.com/watch?v=0V7KE2cHOJU" coords="80,180,120,210" shape="rect">
 		</map>
 </div>
-<div class="middle nunito"><h2>Overview</h2>
+<div class="middle nunito"><div class="rotate-icon"><h2>Overview</h2></div>
 <p>this homepage will display information about myself and what I'm working on. This blobfish is my spirit animal by the way. :)</p>
 <img src="image/blobfish_small.png"
                                 alt="A picture of my spirit animal;blobfish"
