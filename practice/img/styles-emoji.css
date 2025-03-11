@@ -80,3 +80,18 @@ body{
     transform: translate(50%);
    top: 57px;
 }
+
+.rotate {
+    height: 300px;
+    width: 300px;
+    background-color: red;
+    animation-name: rotate;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+/* Controls the animation */
+
+@keyframes rotate {
+    100% {transform: rotate(360deg);}
+}
