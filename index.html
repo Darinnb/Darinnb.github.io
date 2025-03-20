@@ -8,15 +8,37 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+<link rel="stylesheet"  href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <style>
 #grid{
  display:grid;
-        grid-template-rows: repeat(8, 1fr);
-        grid-template-columns: repeat(8, 1fr);
-        height:100vh;
+ height:100vh;
         text-align:center;
         font-size:2em;
-        gap:10px;
+margin:5px;
+grid:
+	'head   head head'    2fr
+        'side middle  project' 5fr
+	'validator validator validator' 5fr       
+         /1fr    1fr  1fr;
+
+}
+
+@media (max-width: 400px) {
+   #grid{
+        grid:
+            'head' 1fr
+            'middle' 2fr
+            'side' 2fr
+            'project' 2fr
+	    'validator'5fr
+	     /4fr;
+}
+}
+footer{
+grid-area:validator;
 }
 .nunito {
   font-family: "Nunito", serif;
@@ -24,35 +46,29 @@
   font-style: normal;
 }
 .head{
-	grid-column-start:1;
-	grid-column-end:9;
-	grid-row-start:1;
-	background-color:#7daf9c;
-	padding-top: 10px;
-	padding-bottom: 15px;
+        grid-area:head;
+    border-radius:2%;
+        background-color:#7daf9c;
+        padding-top: 10px;
+        padding-bottom: 15px;
 }
 .side{
-	grid-column-start:1;
-	grid-column-end:3;
-	grid-row-start:2;
-	grid-row-end:10;
+        grid-area:side;
+	border-radius:2%;
 	font-size:15px;
-	background-color:#23967f;
+        background-color:#23967f;
 }
 .project{
-	grid-column-start:7;
-	grid-column-end:9;
-	grid-row-start:2;
-	grid-row-end:10;
-	background-color:#23967f;
-	font-size:15px;
+        grid-area:project;
+	border-radius:2%;
+        background-color:#23967f;
+        font-size:15px;
 }
 .middle{
-	grid-column-start:3;
-	grid-column-end:7;
-	grid-row-start:2;
-	grid-row-end:10;
-	background-color:#db93b0;
+        grid-area:middle;
+	border-radius:5%;
+        background-color:#db93b0;
+	font-size:15px;
 }
 
 .rotate-icon {
@@ -63,6 +79,8 @@
 .rotate-icon:hover {
     transform: rotate(360deg); /* Icon rotates 180 degrees on hover */
 }
+
+
 
 </style>
 </head>
@@ -109,7 +127,7 @@
 <h3>This is the Link to <a href="https://github.com/Darinnb/Darinnb.github.io">My GitHub Repo</a></h3>
 		<img src="image/larva.png" alt="larva" usemap="#image-map">
 		<map name="image-map">
-		<area target="_blank" alt="larva" title="under-lip" href="https://www.youtube.com/watch?v=0V7KE2cHOJU" coords="80,180,120,210" shape="rect">
+		<area target="_blank" alt="larva" title="under-lip" href="https://www.youtube.com/watch?v=0V7KE2cHOJU" coords="40,140,80,170" shape="rect">
 		</map>
 </div>
 <div class="middle nunito"><div class="rotate-icon"><h2>Overview</h2></div>
@@ -120,13 +138,15 @@
                                 srcset="image/blobfish_small.png 530w,
                                         image/blobfish_medium.png 850w,
                                         image/blobfish_large.png 1250w"
-                                sizes="(max-width: 480px) 95vw,
+                                sizes="(max-width: 480px) 30vw,
                                        (max-width: 800px) 45vw,
                                          30vw"></div>
 
 
-
+<footer>
+</footer>
 </div>
                         
 		</body>
+
 </html> 
