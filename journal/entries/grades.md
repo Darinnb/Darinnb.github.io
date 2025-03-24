@@ -12,7 +12,6 @@ This is a completion activity and I won't use your confidence scores to calculat
 We'll use this to inform our study plan for the test.
 
 ## WDE Exam Objectives
-								ABCDE
 | Section                                                       | Objective | Confidence | Description                                                                                                                                                                                                                        |
 |---------------------------------------------------------------|-----------|------------| -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Section 1: HTML Fundamentals**                              | 1.1       | a          | Describe the basic structure of an HTML document, including the <!DOCTYPE> declaration.                                                                                                                                            |
