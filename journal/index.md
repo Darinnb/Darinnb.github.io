@@ -1,3 +1,4 @@
 - [My first journal entry](entries/01_Intro.md)
 - [culinary website](entries/culinary.md)
 - [grading my confidence](entries/grades.md)
+- [improvement of my grade after 2 practices](entries/pract.md)
