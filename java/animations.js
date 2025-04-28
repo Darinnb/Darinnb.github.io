@@ -6,14 +6,15 @@ let x=0;
 let y=0;
 let yay=5;
 let ay=1;
-
+let score =0;
+let gameRunning =true
 //this is an object
 //we access values like this:
 //player.x
 const player={
 	//key:value pair
-	x:0,
-	y:0,
+	x:200,
+	y:200,
 	color: 'green',
 	speed:3
 };
@@ -30,7 +31,7 @@ function drawRect(x,y) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = 'blue';
     ctx.fillRect(x,y,50,50);
-    ctx.fill();
+ 
 }
 
 function drawPlayer(){
@@ -51,18 +52,46 @@ function movePlayer(){
 		player.y += player.speed;}
 	if (keys['ArrowUp']){
 		player.y -= player.speed;}
-	if (keys['ArrowLeft']){
+	if (keys['ArrowLeft']&&
+		player.x >0){
 		player.x -= player.speed;}
-	if (keys['ArrowRight']){
+	if (keys['ArrowRight'] &&
+		player.x < 400){
 		player.x += player.speed;}	
+
+	//if (player.y ==400){
+		//player.y=player.y - 400;}
+	//if (player.y ==0){
+               // player.y=player.y - 400;}
+	//if (player.x ==400){
+               // player.x=player.x - 400;}
+	//if (player.x ==0){
+               // player.x =player.x - 400;}
+	if(player.y < 0){
+		player.y= 400;}
+	if(player.y > 400){
+		player.y=0;}
 
 };
 
+function  drawScore(){
+	ctx.font = "10px Arial";
+	ctx.fillText(score, 10,10);
+}
 
 function animate() {
+
+	if(gameRunning){
+		
+
+score = score+1;
+if (score >= 100){
+	gameRunning = false;}
+//Game over?
 x=x+yay;  
 y=y+ay;
  drawRect(x,y);
+drawScore();
 drawPlayer();
 movePlayer();
 
@@ -105,4 +134,5 @@ document.addEventListener('keyup',(e)=>{
 
 
 //call our function
+}
 animate();
