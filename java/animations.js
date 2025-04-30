@@ -85,8 +85,6 @@ function animate() {
 		
 
 score = score+1;
-if (score >= 100){
-	gameRunning = false;}
 //Game over?
 x=x+yay;  
 y=y+ay;
@@ -94,6 +92,8 @@ y=y+ay;
 drawScore();
 drawPlayer();
 movePlayer();
+checkCollision();
+
 
     // TODO: Add some code here 
     //  that will change the rectangle's position
@@ -110,7 +110,26 @@ ay=ay*-1;
 }
 if(y>350){
 ay=ay*-1;
-}
+}}
+function checkCollision(){
+//does player touch box? using AABB
+//make hlper variables
+
+let box_min_x =x-50;
+let box_min_y =y-50;
+let box_max_x =x+50;
+let box_max_y =y+50;
+
+let player_min_x = player.x-20;
+let player_min_y = player.y-20;
+let player_max_x = player.x+20;
+let player_max_y = player.y+20;
+
+if (box_max_y > player_min_y &&
+	box_min_y < player_max_y &&
+	box_max_x > player_min_x &&
+	box_min_x < player_max_x){
+	gameRunning = false;}
     requestAnimationFrame(animate);
 }
 						//making the player
