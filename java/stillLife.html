@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Self Portrait</title>
+    <script src="../../js/init.js"></script>
+    <style>
+        canvas{
+            display:block;
+            border:1px solid;
+            margin:auto;
+            margin-top:50px
+        }
+    </style>
+</head>
+<body>
+<canvas id="myCanvas" width="400" height="400"></canvas>
+ <script>
+    const canvas = document.getElementById("myCanvas");
+    const ctx = canvas.getContext("2d");
+ 
+//canvas
+ctx.fillStyle = 'white';
+    ctx.fillRect(0,0,400,400);
+//road
+ctx.fillStyle = "black";
+    ctx.fillRect(0,350,400,400);
+//yellowRoadMark
+	function yellowRoadMark(x){
+ctx.fillStyle = "yellow";
+    ctx.fillRect(x,370,40,15);
+}
+//mainguy
+function drawPlayer(x,y){
+ctx.fillStyle = "pink";
+    ctx.fillRect(x,y,20,20);
+
+ctx.fillStyle = "blue";
+ctx.beginPath();
+ctx.moveTo(x,y-8);
+ctx.lineTo(x+5,y);
+ctx.lineTo(x,y);
+ctx.lineTo(x,y-8);
+ctx.fill();
+ctx.strokeStyle="blue";
+ctx.stroke();
+
+
+ctx.fillStyle = "blue";
+ctx.beginPath();
+ctx.moveTo(x+5,y-8);
+ctx.lineTo(x+10,y);
+ctx.lineTo(x+5,y);
+ctx.lineTo(x+5,y-8);
+ctx.fill();
+ctx.strokeStyle="blue";
+ctx.stroke();
+
+ctx.fillStyle = "blue";
+ctx.beginPath();
+ctx.moveTo(x+10,y-8);
+ctx.lineTo(x+15,y);
+ctx.lineTo(x+10,y);
+ctx.lineTo(x+10,y-8);
+ctx.fill();
+ctx.strokeStyle="blue";
+ctx.stroke();
+
+
+ctx.fillStyle = "blue";
+ctx.beginPath();
+ctx.moveTo(x+15,y-8);
+ctx.lineTo(x+20,y);
+ctx.lineTo(x+15,y);
+ctx.lineTo(x+15,y-8);
+ctx.fill();
+ctx.strokeStyle="blue";
+ctx.stroke();
+
+ctx.beginPath();
+ctx.arc(x+5,y+5,1, 0, 2 * Math.PI);
+ctx.fillStyle = "black";
+ctx.fill();
+ctx.strokeStyle="black";
+ctx.stroke();
+
+ctx.beginPath();
+ctx.arc(x+13,y+5,1, 0, 2 * Math.PI);
+ctx.fillStyle = "black";
+ctx.fill();
+ctx.strokeStyle="black";
+ctx.stroke();
+
+ctx.fillStyle = "red";
+    ctx.fillRect(x+6,y+10,10,2);
+
+}
+function shooter(x,y){
+ctx.beginPath();
+ctx.arc(x, y, 7, 0, 2 * Math.PI);
+ctx.fillStyle = "lime";
+ctx.fill();
+ctx.strokeStyle="orange";
+ctx.stroke();
+}
+
+
+
+
+
+
+shooter(20,210);
+shooter(200,20);
+shooter(278,53);
+shooter(230,320);
+shooter(150,340);
+shooter(340,256);
+shooter(50,50);
+drawPlayer(200,200);
+yellowRoadMark(0);
+yellowRoadMark(57);					
+yellowRoadMark(114);
+yellowRoadMark(171);
+yellowRoadMark(228);
+yellowRoadMark(285);
+yellowRoadMark(342);
+yellowRoadMark(399);
+
+
+
+
+
+
+</script>
+</body>
+</html>
+
