@@ -21,11 +21,18 @@
 //canvas
 ctx.fillStyle = 'white';
     ctx.fillRect(0,0,400,400);
+//background
+ctx.fillStyle = "#A0DDFF";
+    ctx.fillRect(0,0,400,400);
+
+
+
+
 //road
 ctx.fillStyle = "black";
     ctx.fillRect(0,350,400,400);
 //yellowRoadMark
-	function yellowRoadMark(x){
+function yellowRoadMark(x){
 ctx.fillStyle = "yellow";
     ctx.fillRect(x,370,40,15);
 }
@@ -102,12 +109,41 @@ ctx.fill();
 ctx.strokeStyle="orange";
 ctx.stroke();
 }
+//clouds
+function cloud(x,y){
+ctx.beginPath();
+ctx.arc(x, y, 23, 0, 2 * Math.PI);
+ctx.fillStyle = "white";
+ctx.fill();
+ctx.strokeStyle="black";
+ctx.stroke();
+
+ctx.beginPath();
+ctx.arc(x+28, y-16, 23, 0, 2 * Math.PI);
+ctx.fillStyle = "white";
+ctx.fill();
+ctx.strokeStyle="black";
+ctx.stroke();
+
+ctx.beginPath();
+ctx.arc(x+22, y+16, 23, 0, 2 * Math.PI);
+ctx.fillStyle = "white";
+ctx.fill();
+ctx.strokeStyle="black";
+ctx.stroke();
+
+ctx.beginPath();
+ctx.arc(x+57, y+10, 23, 0, 2 * Math.PI);
+ctx.fillStyle = "white";
+ctx.fill();
+ctx.strokeStyle="black";
+ctx.stroke();
+}
 
 
-
-
-
-
+//call stuff
+cloud(45,65);
+cloud(290,48);
 shooter(20,210);
 shooter(200,20);
 shooter(278,53);
