@@ -4,10 +4,6 @@ const canvas = document.getElementById("myCanvas");
 //canvas
 ctx.fillStyle = 'white';
     ctx.fillRect(0,0,400,400);
-//background
-ctx.fillStyle = "#A0DDFF";
-    ctx.fillRect(0,0,400,400);
-
 
 
  let x=0;
@@ -24,13 +20,16 @@ const player={
 };
 
 
-
-
-
-
+//sky
+function sky(){
+ctx.fillStyle = '#A0DDFF';
+ctx.fillRect(0,0,400,400);
+}
 //road
-ctx.fillStyle = "black";
-    ctx.fillRect(0,350,400,400);
+function road(){
+ctx.fillStyle = 'black';
+ctx.fillRect(0,350,400,400);
+}
 //yellowRoadMark
 function yellowRoadMark(x){
 ctx.fillStyle = "yellow";
@@ -139,6 +138,12 @@ ctx.fill();
 ctx.strokeStyle="black";
 ctx.stroke();
 }
+function background(){
+yellowRoadMark();
+road();
+cloud();
+sky();
+}
 //now im getting things to GOOO
 function movePlayer(){
 	//player.x+=player.speed;
@@ -157,15 +162,14 @@ function movePlayer(){
 function  drawScore(){
         ctx.fillStyle = "black";
 	ctx.font = "5px Arial";
-	ctx.fillText(score, 10,10);
+	ctx.fillText(score, 20,20);
 }
 //so this is huge
 function animate() {
 	if(gameRunning){
-ctx.clearRect(0,0,400,400);
 score = score+1;
 drawScore();
-drawPlayer(player.x, player.y);
+drawPlayer()
 movePlayer();
 checkCollision();
 }}
@@ -194,11 +198,7 @@ function handleKeyPress(e){
 	//console.log(e.key);
 	keys[e.key]=true;
 }
-document.addEventListener('keydown', handleKeyPress);
-document.addEventListener('keyup',(e)=>{
-	console.log(e.key + " up");
-	keys[e.key]=false;
-});
+
 
 
 
