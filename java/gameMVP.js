@@ -6,29 +6,45 @@ ctx.fillStyle = 'white';
     ctx.fillRect(0,0,400,400);
 
 
- let x=0;
- let y=0;
  let score =0;
- let gameRunning =true
+ let gameRunning =true;
 const keys={};
 //remebering my player
 const player={
         //key:value pair
         x:200,
         y:200,
-        speed:3
+        speed:5
 };
 
+const listOfBalls = [
+	{x:0, y:200, speed:.2},
+	{x:100, y:3,speed:.1}
+]
 
-//sky
-function sky(){
-ctx.fillStyle = '#A0DDFF';
-ctx.fillRect(0,0,400,400);
+function addNewBall(){
+	listOfBalls.push({
+	x:Math.random(),
+	y:Math.random(),
+	speed: Math.random()
+})
 }
+
+function moveAllBalls(){
+	listOfBalls.forEach((b) => {b.x += b.speed;  b.y+=5})
+}
+function drawAllBalls(){
+listOfBalls.forEach((b) => {shooter(b.x,b.y)});
+}
+
+//background
+function background(){
+ctx.fillStyle = "#A0DDFF";
+    ctx.fillRect(0,0,400,400);}
 //road
-function road(){
-ctx.fillStyle = 'black';
-ctx.fillRect(0,350,400,400);
+function road (){
+ctx.fillStyle = "black";
+    ctx.fillRect(0,350,400,400);
 }
 //yellowRoadMark
 function yellowRoadMark(x){
@@ -36,7 +52,9 @@ ctx.fillStyle = "yellow";
     ctx.fillRect(x,370,40,15);
 }
 //mainguy
-function drawPlayer(x,y){
+function drawPlayer(){
+x=player.x;
+y=player.y;
 ctx.fillStyle = "pink";
     ctx.fillRect(x,y,20,20);
 
@@ -138,52 +156,70 @@ ctx.fill();
 ctx.strokeStyle="black";
 ctx.stroke();
 }
-function background(){
-yellowRoadMark();
+function allOfIt (){
+background();
+cloud(45,65);
+cloud(290,48);
 road();
-cloud();
-sky();
+yellowRoadMark(0);
+yellowRoadMark(57);
+yellowRoadMark(114);
+yellowRoadMark(171);
+yellowRoadMark(228);
+yellowRoadMark(285);
+yellowRoadMark(342);
+yellowRoadMark(399);
+
 }
+
 //now im getting things to GOOO
 function movePlayer(){
-	//player.x+=player.speed;
-	if(keys['ArrowDown']){
-		player.y += player.speed;}
-	if (keys['ArrowUp']){
+	//iplayer.x+=player.speed;
+	if(keys['ArrowDown']&&
+		player.y < 390){	
+	player.y += player.speed;}
+	if (keys['ArrowUp']&&
+		player.y >0){
 		player.y -= player.speed;}
 	if (keys['ArrowLeft']&&
-		player.x >0){
+		player.x > 0){
 		player.x -= player.speed;}
 	if (keys['ArrowRight'] &&
-		player.x < 400){
+		player.x < 390){
 		player.x += player.speed;}	
+
 }
 //score
 function  drawScore(){
         ctx.fillStyle = "black";
 	ctx.font = "5px Arial";
-	ctx.fillText(score, 20,20);
+	ctx.fillText(score, 10,10);
 }
 //so this is huge
 function animate() {
+ctx.clearRect(0,0,400,400);
 	if(gameRunning){
 score = score+1;
+allOfIt();
 drawScore();
-drawPlayer()
+drawPlayer();
 movePlayer();
+moveAllBalls();
+drawAllBalls();
 checkCollision();
+requestAnimationFrame(animate);
 }}
 function checkCollision(){
 //does player touch box? using AABB
 //make hlper variables
+     listOfBalls.forEach((b) => {
+let box_min_x =b.x-7;
+let box_min_y =b.y-7;
+let box_max_x =b.x+7;
+let box_max_y =b.y+7;
 
-let box_min_x =x-50;
-let box_min_y =y-50;
-let box_max_x =x+50;
-let box_max_y =y+50;
-
-let player_min_x = player.x-20;
-let player_min_y = player.y-20;
+let player_min_x = player.x;
+let player_min_y = player.y-8;
 let player_max_x = player.x+20;
 let player_max_y = player.y+20;
 
@@ -191,27 +227,28 @@ if (box_max_y > player_min_y &&
 	box_min_y < player_max_y &&
 	box_max_x > player_min_x &&
 	box_min_x < player_max_x){
-	gameRunning = false;}
-    requestAnimationFrame(animate);
+//	gameRunning = false;
+}})
+    
 }
+
+
 function handleKeyPress(e){
+	e.preventDefault();
 	//console.log(e.key);
 	keys[e.key]=true;
 }
+
+document.addEventListener('keydown', handleKeyPress);
+document.addEventListener('keyup', (e) =>{
+e.preventDefault();
+keys[e.key]=false;
+});
+
 
 
 
 
 //call stuff
-cloud(45,65);
-cloud(290,48);
-yellowRoadMark(0);
-yellowRoadMark(57);					
-yellowRoadMark(114);
-yellowRoadMark(171);
-yellowRoadMark(228);
-yellowRoadMark(285);
-yellowRoadMark(342);
-yellowRoadMark(399);
 animate();
 
