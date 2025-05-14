@@ -7,7 +7,8 @@ ctx.fillStyle = 'white';
 
 
  let score =0;
- let gameRunning =true;
+let highScore=0; 
+let gameRunning =true;
 const keys={};
 //remebering my player
 const player={
@@ -18,20 +19,21 @@ const player={
 };
 
 const listOfBalls = [
-	{x:0, y:200, speed:.2},
-	{x:100, y:3,speed:.1}
+	{x:0, y:200, xspeed:.2, yspeed: 6},
+	{x:100, y:3,xspeed:.1,yspeed:4}
 ]
 
 function addNewBall(){
 	listOfBalls.push({
-	x:Math.random(),
-	y:Math.random(),
-	speed: Math.random()
-})
+	x:Math.random()*400,
+	y:0,
+	xspeed: (Math.random()*12)-6,
+	yspeed: Math.random()*6
+});
 }
 
 function moveAllBalls(){
-	listOfBalls.forEach((b) => {b.x += b.speed;  b.y+=5})
+	listOfBalls.forEach((b) => {b.x += b.xspeed;  b.y+=b.yspeed})
 }
 function drawAllBalls(){
 listOfBalls.forEach((b) => {shooter(b.x,b.y)});
@@ -156,6 +158,17 @@ ctx.fill();
 ctx.strokeStyle="black";
 ctx.stroke();
 }
+function reset(){
+listOfBalls.splice(0,listOfBalls.length)
+frame = 0;
+score = 0;
+if (!gameRunning) {
+gameRunning = true;
+animate();
+}
+}
+
+
 function allOfIt (){
 background();
 cloud(45,65);
@@ -192,20 +205,25 @@ function movePlayer(){
 //score
 function  drawScore(){
         ctx.fillStyle = "black";
-	ctx.font = "5px Arial";
-	ctx.fillText(score, 10,10);
+	ctx.font = "15px Arial";
+	ctx.fillText(score, 10,15);
 }
 //so this is huge
+let frame = 0;
 function animate() {
-ctx.clearRect(0,0,400,400);
 	if(gameRunning){
-score = score+1;
+ctx.clearRect(0,0,400,400);
+frame++;
 allOfIt();
 drawScore();
 drawPlayer();
 movePlayer();
 moveAllBalls();
 drawAllBalls();
+if (frame % 60 == 0) {
+	for (let i = 0; i < frame/60; i++) addNewBall();
+	score++;
+}
 checkCollision();
 requestAnimationFrame(animate);
 }}
@@ -227,7 +245,7 @@ if (box_max_y > player_min_y &&
 	box_min_y < player_max_y &&
 	box_max_x > player_min_x &&
 	box_min_x < player_max_x){
-//	gameRunning = false;
+	gameRunning = false;
 }})
     
 }
@@ -244,7 +262,7 @@ document.addEventListener('keyup', (e) =>{
 e.preventDefault();
 keys[e.key]=false;
 });
-
+document.getElementById("reset").addEventListener("click", reset);
 
 
 
