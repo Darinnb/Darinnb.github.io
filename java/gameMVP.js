@@ -225,6 +225,7 @@ function animate() {
 			score++;
 		}
 		checkCollision();
+		document.getElementById("highscore").innerHTML = "Highscore: " + highScore;
 		if (score > highScore) highScore = score;
 		requestAnimationFrame(animate);
 	}
