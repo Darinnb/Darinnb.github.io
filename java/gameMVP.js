@@ -6,8 +6,8 @@ ctx.fillStyle = 'white';
     ctx.fillRect(0,0,400,400);
 
 
- let score =0;
-let highScore=0; 
+let score = 0;
+let highScore = 0; 
 let gameRunning =true;
 const keys={};
 //remebering my player
@@ -212,42 +212,44 @@ function  drawScore(){
 let frame = 0;
 function animate() {
 	if(gameRunning){
-ctx.clearRect(0,0,400,400);
-frame++;
-allOfIt();
-drawScore();
-drawPlayer();
-movePlayer();
-moveAllBalls();
-drawAllBalls();
-if (frame % 60 == 0) {
-	for (let i = 0; i < frame/60; i++) addNewBall();
-	score++;
+		ctx.clearRect(0,0,400,400);
+		frame++;
+		allOfIt();
+		drawScore();
+		drawPlayer();
+		movePlayer();
+		moveAllBalls();
+		drawAllBalls();
+		if (frame % 60 == 0) {
+			for (let i = 0; i < frame/60; i++) addNewBall();
+			score++;
+		}
+		checkCollision();
+		if (score > highScore) highScore = score;
+		requestAnimationFrame(animate);
+	}
 }
-checkCollision();
-requestAnimationFrame(animate);
-}}
 function checkCollision(){
 //does player touch box? using AABB
 //make hlper variables
-     listOfBalls.forEach((b) => {
-let box_min_x =b.x-7;
-let box_min_y =b.y-7;
-let box_max_x =b.x+7;
-let box_max_y =b.y+7;
+	listOfBalls.forEach((b) => {
+		let box_min_x =b.x-7;
+		let box_min_y =b.y-7;
+		let box_max_x =b.x+7;
+		let box_max_y =b.y+7;
 
-let player_min_x = player.x;
-let player_min_y = player.y-8;
-let player_max_x = player.x+20;
-let player_max_y = player.y+20;
+		let player_min_x = player.x;
+		let player_min_y = player.y-8;
+		let player_max_x = player.x+20;
+		let player_max_y = player.y+20;
 
-if (box_max_y > player_min_y &&
-	box_min_y < player_max_y &&
-	box_max_x > player_min_x &&
-	box_min_x < player_max_x){
-	gameRunning = false;
-}})
-    
+		if (box_max_y > player_min_y &&
+			box_min_y < player_max_y &&
+			box_max_x > player_min_x &&
+			box_min_x < player_max_x){
+			gameRunning = false;
+		}
+	});
 }
 
 
@@ -258,14 +260,11 @@ function handleKeyPress(e){
 }
 
 document.addEventListener('keydown', handleKeyPress);
-document.addEventListener('keyup', (e) =>{
-e.preventDefault();
-keys[e.key]=false;
+document.addEventListener('keyup', (e) => {
+	e.preventDefault();
+	keys[e.key]=false;
 });
 document.getElementById("reset").addEventListener("click", reset);
-
-
-
 
 //call stuff
 animate();
