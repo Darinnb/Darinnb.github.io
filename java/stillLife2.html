@@ -7,29 +7,74 @@
     <title>My Self Portrait</title>
     <script src="../js/init.js"></script>
     <style>
+
+
+
         canvas{
             display:block;
             border:1px solid;
             margin:auto;
             margin-top:50px
         }
+
+.gridhead {
+    grid-column: 1 / span 3;
+    padding: 5px;
+    text-align: center;
+	background-color:#B1F8F2;
+	width: 95%;
+        margin: auto;
+border:2px solid;
+}
+.rules {
+ grid-column: 1 / span 1;
+    padding: 5px;
+    text-align: center;
+	background-color:#B1F8F2;
+	width: 15%;
+	margin: auto;
+
+border:1px solid;
+}
+.main{
+ grid-column: 1 / span 2;
+    padding: 5px;
+    text-align: center;
+        background-color:#B1F8F2;
+     width: 35%;
+        margin: auto;
+border:2px solid;
+}
+.reset{
+ grid-column: 1 / span 2;
+    padding: 5px;
+    text-align: center;
+        background-color:#B1F8F2;
+     width: 5%;
+        margin: auto;
+border:2px solid;
+}
+
+
+
     </style>
 </head>
-<body>
-<p>Overview:
-This is a survival type game where you have to run away from little shooters. Everysecond another shooter is added and the goal of the game is to keep growing your high score by how long you survive.
-
-The rules:
-Survive by using your UP, DOWN, LEFT, RIGHT arrow keys.
-Don’t get hit by the shooters
-Have Fun!!
-</p>
+<body style="background-color:#EAFDCF;"
+>
+<div class="gridhead"><p>Overview:
+<p>This is a survival type game where you have to run away from little shooters. Everysecond another shooter is added and the goal of the game is to keep growing your high score by how long you survive.
+</p></div>
+<div class="rules"><h2>The rules:</h2></div>
+<div class="main"><p>Survive by using your UP, DOWN, LEFT, RIGHT arrow keys.</p>
+<p>Don’t get hit by the shooters</p>
+<p>Have Fun!!
+</p></div>
 <canvas id="myCanvas" width="400" height="400"></canvas>
-<button id="reset">Reset</button>
+<div class="reset"><button id="reset">Reset</button></div>
 
 
-<p id="highscore" style="max-width: 100px; border: 2px solid; border-radius: 5px"   >Highscore: </p>
-
+<div class=score"><p id="highscore" style="max-width: 100px; border: 2px solid; border-radius: 5px"   >Highscore: </p>
+</div>
 
 <script src="gameMVP.js"></script>
 </body>
