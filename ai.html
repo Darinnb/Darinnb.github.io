@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kawaii Planet - Wiggly Arms, Wand Creation, Real Galaxy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body { margin: 0; padding: 0; width: 100vw; height: 100vh; background: #000; overflow: hidden; }
+    #storyCanvas { display: block; position: absolute; left: 0; top: 0; width: 100vw; height: 100vh; background: #000; }
+    #startBtn, #restartBtn {
+      position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+      background: #fff; color: #111; border: 2px solid #ccc; border-radius: 12px;
+      font-size: 2em; font-family: Arial, sans-serif; font-weight: bold;
+      padding: 18px 48px; cursor: pointer; z-index: 3; user-select: none;
+      display: none;
+    }
+    #startBtn { display: block; }
+    #restartBtn { z-index: 5; }
+  </style>
+</head>
+<body>
+<canvas id="storyCanvas"></canvas>
+<button id="startBtn">Start</button>
+<button id="restartBtn">Restart</button>
+<script>
+const canvas = document.getElementById('storyCanvas');
+const ctx = canvas.getContext('2d');
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+const planetColors = ["#fff58c", "#ffd6e0", "#b5ead7", "#b4aaff", "#ffc9e3", "#ffd8b1"];
+const cometColors = ["#fff", "#ffe1f6", "#e3eeff"];
+const starColors  = ["#fffde1", "#fff7f7"];
+const THINGS_SEQ = [
+  {type:"planet", color:planetColors[0]},
+  {type:"planet", color:planetColors[1]},
+  {type:"comet", color:cometColors[0]},
+  {type:"comet", color:cometColors[1]},
+  {type:"star",  color:starColors[0]},
+  {type:"star",  color:starColors[1]}
+];
+
+let running = false;
+let lastTime = performance.now();
+let elapsed = 0;
+let storyState = "explore"; // explore, create, gather, galaxy, done
+let companions = [];
+let starBG = [];
+let mainPlanet, creationIndex, nextCreationT, finaleT, showRestartBtn = false;
+
+function resetStory() {
+  running = true;
+  lastTime = performance.now();
+  elapsed = 0;
+  storyState = "explore";
+  showRestartBtn = false;
+  document.getElementById('restartBtn').style.display = "none";
+  mainPlanet = {
+    x: 0.5, y: 0.6, r: 72,
+    mood: "happy", awake: true,
+    armWiggle: 0,
+    armsOpen: false,
+    magicGlow: 0,
+    tired: false,
+    pathT: 0,
+    wandTip: {x:0, y:0}
+  };
+  companions = [];
+  creationIndex = 0;
+  nextCreationT = 11;
+  finaleT = 0;
+  starBG = [];
+}
+
+function planetPath(t) {
+  let speed = t<12 ? 1.8 : 1.1;
+  let drift = 0.14 + 0.1*Math.cos(t*0.26);
+  let cx = 0.5 + Math.sin(t*speed)*drift + 0.1*Math.sin(t*0.19);
+  let cy = 0.5 + Math.sin(t*speed*1.3 + 1.2)*drift*0.7 + 0.03*Math.cos(t*0.33);
+  return {x:cx, y:cy};
+}
+
+function drawStarBG() {
+  let w = canvas.width, h = canvas.height;
+  if (!starBG.length) {
+    for (let i=0; i<120; ++i) {
+      starBG.push({
+        x: Math.random()*w, y: Math.random()*h,
+        r: 0.5+Math.random()*2.7,
+        o: 0.25+Math.random()*0.65,
+        speed: 0.07+Math.random()*0.08
+      });
+    }
+  }
+  for (let s of starBG) {
+    s.x -= s.speed;
+    if (s.x < 0) s.x += w;
+    ctx.save();
+    ctx.globalAlpha = s.o;
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+    ctx.fillStyle = "#fff";
+    ctx.shadowBlur = s.r*8;
+    ctx.shadowColor = "#fff";
+    ctx.fill();
+    ctx.globalAlpha = 1.0;
+    ctx.restore();
+  }
+}
+
+// --- Main planet arms & wand (lower, wiggly) ---
+function drawPlanetWithArms(p, elapsed) {
+  let w = canvas.width, h = canvas.height;
+  ctx.save();
+  ctx.shadowColor = "#3489d9";
+  ctx.shadowBlur = 36;
+  ctx.beginPath();
+  ctx.arc(w*p.x, h*p.y, p.r, 0, Math.PI*2);
+  ctx.fillStyle = "#40b4ff";
+  ctx.fill();
+  ctx.restore();
+
+  // Arms: lower on planet, move with a gentle wiggle
+  let open = p.armsOpen ? 1 : 0;
+  let baseAngleL = Math.PI*1.19 + open*0.25;
+  let baseAngleR = Math.PI*1.81 - open*0.25;
+  let wiggleL = Math.sin(elapsed*1.2)*0.1 + Math.cos(elapsed*0.6)*0.09;
+  let wiggleR = Math.cos(elapsed*1.5)*0.1 + Math.sin(elapsed*0.6)*0.09;
+  let angleL = baseAngleL + wiggleL;
+  let angleR = baseAngleR + wiggleR;
+
+  // Left arm
+  let armLenL = p.r*0.62;
+  let armW = Math.max(7, p.r*0.13);
+  let armLStart = {
+    x: w*p.x + Math.cos(angleL)*p.r*0.94,
+    y: h*p.y + Math.sin(angleL)*p.r*0.94
+  };
+  let armLEnd = {
+    x: armLStart.x + Math.cos(angleL)*armLenL*0.8,
+    y: armLStart.y + Math.sin(angleL)*armLenL*0.8
+  };
+  ctx.save();
+  ctx.strokeStyle = "#3180d1";
+  ctx.lineWidth = armW;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(armLStart.x, armLStart.y);
+  ctx.lineTo(armLEnd.x, armLEnd.y);
+  ctx.stroke();
+  ctx.restore();
+
+  // Right arm (with wand)
+  let armLenR = p.r*0.68;
+  let armRStart = {
+    x: w*p.x + Math.cos(angleR)*p.r*0.94,
+    y: h*p.y + Math.sin(angleR)*p.r*0.94
+  };
+  let armREnd = {
+    x: armRStart.x + Math.cos(angleR)*armLenR,
+    y: armRStart.y + Math.sin(angleR)*armLenR
+  };
+  ctx.save();
+  ctx.strokeStyle = "#3180d1";
+  ctx.lineWidth = armW;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(armRStart.x, armRStart.y);
+  ctx.lineTo(armREnd.x, armREnd.y);
+  ctx.stroke();
+  ctx.restore();
+
+  // Wand: sticks out from right hand, slightly upward angle
+  let wandAngle = angleR - Math.PI/6;
+  let wandLen = p.r*0.7;
+  let wandTip = {
+    x: armREnd.x + Math.cos(wandAngle)*wandLen,
+    y: armREnd.y + Math.sin(wandAngle)*wandLen
+  };
+  ctx.save();
+  ctx.strokeStyle = "#a97b50";
+  ctx.lineWidth = 6;
+  ctx.beginPath();
+  ctx.moveTo(armREnd.x, armREnd.y);
+  ctx.lineTo(wandTip.x, wandTip.y);
+  ctx.stroke();
+  // Tiny yellow tip
+  ctx.beginPath();
+  ctx.arc(wandTip.x, wandTip.y, 8, 0, Math.PI*2);
+  ctx.fillStyle = "#ffe84c";
+  ctx.shadowBlur = 12;
+  ctx.shadowColor = "#ffe8a6";
+  ctx.globalAlpha = 0.95;
+  ctx.fill();
+  ctx.restore();
+  p.wandTip = {x:wandTip.x, y:wandTip.y};
+
+  // Subtle spark when creating
+  if (p.magicGlow>0) {
+    ctx.save();
+    ctx.globalAlpha = p.magicGlow*0.9;
+    ctx.beginPath();
+    ctx.arc(wandTip.x, wandTip.y, 20+p.magicGlow*30, 0, Math.PI*2);
+    ctx.fillStyle = "#fffbe7";
+    ctx.shadowBlur = 32;
+    ctx.shadowColor = "#fffbe7";
+    ctx.fill();
+    ctx.restore();
+  }
+
+  // Face
+  drawKawaiiFace(w*p.x, h*p.y, p.r, p.mood, p.awake);
+}
+
+function drawKawaiiFace(x, y, r, mood = "smile", awake = true, tear=0) {
+  let eyeY = y + r * 0.18;
+  let eyeX1 = x - r * 0.27, eyeX2 = x + r * 0.27;
+  let eyeR = r * 0.13;
+  ctx.beginPath(); ctx.arc(eyeX1, eyeY, eyeR, 0, Math.PI * 2); ctx.arc(eyeX2, eyeY, eyeR, 0, Math.PI * 2);
+  ctx.fillStyle = "#fff"; ctx.fill();
+  if (awake) {
+    ctx.beginPath();
+    ctx.arc(eyeX1, eyeY, eyeR * 0.7, 0, Math.PI * 2);
+    ctx.arc(eyeX2, eyeY, eyeR * 0.7, 0, Math.PI * 2);
+    ctx.fillStyle = "#222"; ctx.fill();
+    ctx.beginPath();
+    ctx.arc(eyeX1 - eyeR*0.23, eyeY - eyeR*0.23, eyeR * 0.27, 0, Math.PI*2);
+    ctx.arc(eyeX2 - eyeR*0.23, eyeY - eyeR*0.23, eyeR * 0.27, 0, Math.PI*2);
+    ctx.fillStyle = "#fff"; ctx.fill();
+  } else {
+    ctx.save();
+    ctx.lineWidth = Math.max(2, r * 0.11); ctx.strokeStyle = "#222";
+    ctx.beginPath();
+    ctx.moveTo(eyeX1-eyeR*0.55, eyeY+eyeR*0.05);
+    ctx.quadraticCurveTo(eyeX1, eyeY+eyeR*0.28, eyeX1+eyeR*0.55, eyeY+eyeR*0.05);
+    ctx.moveTo(eyeX2-eyeR*0.55, eyeY+eyeR*0.05);
+    ctx.quadraticCurveTo(eyeX2, eyeY+eyeR*0.28, eyeX2+eyeR*0.55, eyeY+eyeR*0.05);
+    ctx.stroke(); ctx.restore();
+  }
+  ctx.save(); ctx.lineWidth = Math.max(2, r * 0.07); ctx.lineCap = "round"; ctx.strokeStyle = "#222"; ctx.beginPath();
+  if(mood === "smile" || mood === "happy") ctx.arc(x, y + r*0.31, r*0.21, 0.07*Math.PI, 0.93*Math.PI, false);
+  else if(mood === "sleep" || !awake) { ctx.moveTo(x - r*0.16, y + r*0.33); ctx.lineTo(x + r*0.16, y + r*0.33);}
+  else if(mood === "lonely" || mood==="sad") ctx.arc(x, y + r*0.39, r*0.17, 1.1*Math.PI, 1.9*Math.PI, true);
+  else if(mood === "hopeful") ctx.arc(x, y + r*0.34, r*0.18, 0.17*Math.PI, 0.83*Math.PI, false);
+  else if(mood === "surprised") ctx.arc(x, y + r*0.34, r*0.09, 0, 2*Math.PI, false);
+  else if(mood === "content") ctx.arc(x, y + r*0.35, r*0.13, 0.1*Math.PI, 0.9*Math.PI, false);
+  else if(mood === "blank") { ctx.moveTo(x - r*0.12, y + r*0.32); ctx.lineTo(x + r*0.12, y + r*0.32);}
+  ctx.stroke(); ctx.restore();
+}
+
+function drawThing(thing) {
+  if (thing.type === "planet") {
+    ctx.save();
+    ctx.shadowColor = "#888";
+    ctx.shadowBlur = 14;
+    ctx.beginPath();
+    ctx.arc(thing.x, thing.y, thing.r, 0, Math.PI*2);
+    ctx.fillStyle = thing.color;
+    ctx.globalAlpha = 0.99;
+    ctx.fill();
+    ctx.restore();
+    drawKawaiiFace(thing.x, thing.y, thing.r, "happy", true);
+  } else if (thing.type === "comet") {
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(thing.x, thing.y, thing.r, 0, Math.PI*2);
+    ctx.fillStyle = thing.color;
+    ctx.shadowColor = "#fff";
+    ctx.shadowBlur = 10;
+    ctx.globalAlpha = 0.83;
+    ctx.fill();
+    ctx.restore();
+    ctx.save();
+    ctx.globalAlpha = 0.5;
+    ctx.strokeStyle = "#fff";
+    ctx.beginPath();
+    ctx.moveTo(thing.x, thing.y);
+    ctx.lineTo(thing.x-thing.vx*8, thing.y-thing.vy*8);
+    ctx.lineWidth = thing.r*1.2;
+    ctx.stroke();
+    ctx.restore();
+    drawKawaiiFace(thing.x, thing.y, thing.r*0.88, "happy", true);
+  } else if (thing.type === "star") {
+    ctx.save();
+    ctx.globalAlpha = thing.o || 1;
+    ctx.beginPath();
+    ctx.arc(thing.x, thing.y, thing.r, 0, Math.PI*2);
+    ctx.fillStyle = thing.color;
+    ctx.shadowBlur = thing.r*8;
+    ctx.shadowColor = thing.color;
+    ctx.fill();
+    ctx.globalAlpha = 1.0;
+    ctx.restore();
+    drawKawaiiFace(thing.x, thing.y, thing.r*0.98, "happy", true);
+  }
+}
+
+function drawTinyGalaxy(cx, cy, t, shrink) {
+  let baseR = 34*shrink;
+  let ringR = 75*shrink;
+  ctx.save();
+  ctx.globalAlpha = 0.28 + 0.08*Math.sin(elapsed*2);
+  ctx.strokeStyle = "#b0e7ff";
+  ctx.lineWidth = 8*shrink;
+  ctx.beginPath();
+  ctx.ellipse(cx, cy, ringR, ringR*0.38, t*0.5, 0, Math.PI*2);
+  ctx.stroke();
+  ctx.restore();
+
+  for (let i=0; i<36; ++i) {
+    let angle = i*0.32 + t*0.7;
+    let rr = baseR + 40*shrink*(i/36);
+    ctx.save();
+    ctx.globalAlpha = 0.8-0.015*i;
+    ctx.beginPath();
+    ctx.arc(cx + Math.cos(angle)*rr, cy + Math.sin(angle)*rr*0.87, 3.2*shrink, 0, Math.PI*2);
+    ctx.fillStyle = i%2===0 ? "#fff" : "#afe0ff";
+    ctx.shadowBlur = 7;
+    ctx.shadowColor = "#fff";
+    ctx.fill();
+    ctx.restore();
+  }
+  for (let i=0;i<companions.length;++i) {
+    let obj = companions[i];
+    let angle = t*0.55 + i*Math.PI*2/companions.length;
+    let rr = ringR*0.82 + 8*Math.sin(i+t);
+    let objX = cx + Math.cos(angle)*rr;
+    let objY = cy + Math.sin(angle)*rr*0.7;
+    if (obj.type==="planet") {
+      ctx.save(); ctx.beginPath();
+      ctx.arc(objX, objY, 18*shrink, 0, Math.PI*2);
+      ctx.fillStyle = obj.color; ctx.globalAlpha = 0.95; ctx.fill(); ctx.restore();
+      drawKawaiiFace(objX, objY, 16*shrink, "happy", true);
+    }
+    if (obj.type==="star") {
+      ctx.save();
+      ctx.globalAlpha = 0.89;
+      ctx.beginPath();
+      ctx.arc(objX, objY, 11*shrink, 0, Math.PI*2);
+      ctx.fillStyle = "#fffde1";
+      ctx.shadowBlur = 7;
+      ctx.shadowColor = "#fff";
+      ctx.fill(); ctx.restore();
+      drawKawaiiFace(objX, objY, 9*shrink, "happy", true);
+    }
+    if (obj.type==="comet") {
+      ctx.save();
+      ctx.beginPath(); ctx.arc(objX, objY, 10*shrink, 0, Math.PI*2);
+      ctx.fillStyle = "#fff"; ctx.globalAlpha = 0.85; ctx.fill(); ctx.restore();
+      drawKawaiiFace(objX, objY, 9*shrink, "happy", true);
+    }
+  }
+}
+
+function animate(now) {
+  let dt = Math.min((now - lastTime) / 1000, 0.14);
+  lastTime = now;
+  if (!running) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    return requestAnimationFrame(animate);
+  }
+  elapsed += dt;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  drawStarBG();
+
+  mainPlanet.pathT += dt;
+  let path = planetPath(mainPlanet.pathT);
+  mainPlanet.x = path.x;
+  mainPlanet.y = path.y;
+
+  // Mood: happy, then hopeful, then SAD (just before create), then happy/content/tired/sleep
+  let sadWindowStart = nextCreationT - 1.1;
+  let sadWindowEnd = nextCreationT - 0.07;
+  if (elapsed < 6) mainPlanet.mood = "happy";
+  else if (elapsed < 10) mainPlanet.mood = "hopeful";
+  else if (elapsed < sadWindowStart) mainPlanet.mood = "happy";
+  else if (elapsed < sadWindowEnd) mainPlanet.mood = "sad";
+  else if (elapsed < 18) mainPlanet.mood = "happy";
+  else if (elapsed < 21) mainPlanet.mood = "content";
+  else if (elapsed < 23.5) mainPlanet.mood = "content", mainPlanet.tired = true, mainPlanet.awake = true;
+  else mainPlanet.mood = "sleep", mainPlanet.awake = false;
+
+  // --- Creation sequence ---
+  if (creationIndex < THINGS_SEQ.length && elapsed > nextCreationT) {
+    // Each thing appears exactly at the wand tip (wherever on canvas)
+    let obj = THINGS_SEQ[creationIndex];
+    let wandTip = {...mainPlanet.wandTip};
+    let vx = (Math.random()-0.5)*30, vy = (Math.random()-0.5)*30;
+    companions.push({
+      ...obj,
+      x: wandTip.x, y: wandTip.y,
+      r: obj.type==="planet"?46: (obj.type==="star"?28:22),
+      color: obj.color, t:0, vx, vy,
+      mood:"happy",
+      gathering:false, gatherT:0, gatherStart:{x:wandTip.x,y:wandTip.y}, gatherEnd:{x:canvas.width*mainPlanet.x, y:canvas.height*mainPlanet.y}
+    });
+    mainPlanet.magicGlow = 1;
+    creationIndex++;
+    nextCreationT = elapsed + 1.4 + Math.random()*0.7;
+  }
+
+  mainPlanet.magicGlow -= dt*1.8;
+  if (mainPlanet.magicGlow < 0) mainPlanet.magicGlow = 0;
+
+  // Move companions
+  for (let thing of companions) {
+    thing.t += dt;
+    if (storyState !== "gather" && storyState !== "galaxy") {
+      thing.x += thing.vx*dt*0.8;
+      thing.y += thing.vy*dt*0.8;
+      if (thing.x < thing.r || thing.x > canvas.width-thing.r) { thing.vx *= -1; thing.x = Math.max(thing.r, Math.min(canvas.width-thing.r, thing.x)); }
+      if (thing.y < thing.r || thing.y > canvas.height-thing.r) { thing.vy *= -1; thing.y = Math.max(thing.r, Math.min(canvas.height-thing.r, thing.y)); }
+    }
+    if (thing.gathering) {
+      thing.gatherT += dt;
+      let t = Math.min(1, thing.gatherT/2);
+      let theta = thing.gatherT*2 + companions.indexOf(thing)*0.6;
+      let baseR = 180*(1-t) + 50*t;
+      let cx = canvas.width*mainPlanet.x, cy = canvas.height*mainPlanet.y;
+      thing.x = (1-t)*thing.gatherStart.x + t*(cx + Math.cos(theta)*baseR);
+      thing.y = (1-t)*thing.gatherStart.y + t*(cy + Math.sin(theta)*baseR*0.7);
+    }
+  }
+
+  for (let thing of companions) drawThing(thing);
+  drawPlanetWithArms(mainPlanet, elapsed);
+
+  if (elapsed > 22 && storyState==="explore") {
+    storyState="gather"; finaleT=0;
+    for (let thing of companions) {
+      thing.gathering = true;
+      thing.gatherT = 0;
+      thing.gatherStart = {x:thing.x, y:thing.y};
+      thing.gatherEnd = {x:canvas.width*mainPlanet.x, y:canvas.height*mainPlanet.y};
+    }
+  }
+
+  if (storyState==="gather") {
+    finaleT += dt;
+    let allArrived = companions.every(t => t.gatherT > 2);
+    if (allArrived && finaleT > 3) { storyState="galaxy"; galaxyShrink=1; }
+  }
+  if (storyState==="galaxy") {
+    finaleT += dt;
+    galaxyShrink *= 0.985;
+    let cx = canvas.width*mainPlanet.x, cy = canvas.height*mainPlanet.y;
+    drawTinyGalaxy(cx, cy, finaleT, galaxyShrink);
+    mainPlanet.mood = "sleep"; mainPlanet.awake=false; mainPlanet.armsOpen=true;
+    if (galaxyShrink<0.17 && !showRestartBtn) {
+      setTimeout(()=>{document.getElementById('restartBtn').style.display="block";}, 800);
+      showRestartBtn = true;
+      running = false;
+    }
+  }
+
+  requestAnimationFrame(animate);
+}
+
+document.getElementById('startBtn').addEventListener('click', function() {
+  this.style.display = 'none';
+  resetStory();
+  requestAnimationFrame(animate);
+});
+document.getElementById('restartBtn').addEventListener('click', function() {
+  this.style.display = 'none';
+  resetStory();
+  requestAnimationFrame(animate);
+});
+
+running = false;
+ctx.clearRect(0,0,canvas.width,canvas.height);
+requestAnimationFrame(animate);
+</script>
+</body>
+</html>
